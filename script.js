@@ -12,11 +12,15 @@ function Book(title, author, pages, read) {
     }
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(title, author, pages, read) {
     // take params, create a book then store it in the array
+    myLibrary.push(new Book(title, author, pages, read));
+
 }
 
 // You can add some manual books here to test your display function
-const book1 = new Book("Hahaha", "JC Jang", 17, true);
-console.log(book1.info());
-console.table(book1);
+// const book1 = new Book("Hahaha", "JC Jang", 17, true);
+// console.log(book1.info());
+// console.table(book1);
+addBookToLibrary("Hahaha", "JC Jang", 17, true);
+console.log(myLibrary);
