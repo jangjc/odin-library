@@ -12,6 +12,10 @@ function Book(title, author, pages, read) {
     }
 }
 
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+}
+
 function addBookToLibrary(title, author, pages, read) {
     // take params, create a book then store it in the array
     myLibrary.push(new Book(title, author, pages, read));
@@ -46,11 +50,48 @@ function displayBooks() {
         const readElement = document.createElement("p");
         readElement.textContent = book.read ? "Status: Read" : "Status: Not read yet";
 
+        // --- Toggle Read Button ---
+        const toggleReadBtn = document.createElement("button");
+        toggleReadBtn.textContent = "Toggle Read Status";
+        toggleReadBtn.classList.add("toggle-btn");
+
+        toggleReadBtn.addEventListener("click", () => {
+            const bookIndex = myLibrary.findIndex((b) => b.id === book.id);
+
+            if (bookIndex !== -1) {
+                myLibrary[bookIndex].toggleRead();
+            }
+
+            displayBooks();
+        })
+
+
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.classList.add("remove-btn");
+
+        // Add click listner to remove the book
+        removeBtn.addEventListener("click", () => {
+            // 1. Find the exact index of this book in the array using its ID
+            const bookIndex = myLibrary.findIndex((b) => b.id === book.id);
+
+            // 2. Remove 1 item at that index from the array
+            if (bookIndex !== -1) {
+                myLibrary.splice(bookIndex, 1);
+            }
+
+            // 3. Re-render the UI
+            displayBooks();
+        });
+
         // 3. Append the details to the card
         card.appendChild(titleElement);
         card.appendChild(authorElement);
         card.appendChild(pagesElement);
         card.appendChild(readElement);
+        card.appendChild(toggleReadBtn);
+        card.appendChild(removeBtn);
 
         // 4. Append the fuuly assembled card to the grid container
         libraryContainer.appendChild(card);
