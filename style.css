@@ -22,3 +22,38 @@
     margin-bottom: 5px;
     color: #222;
 }
+
+/* Dialog Backdrop and Layout */
+dialog {
+    margin: auto; /* Centers the dialog */
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Grays out the background when the dialog is open */
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}

@@ -63,10 +63,55 @@ function displayBooks() {
 // const book1 = new Book("Hahaha", "JC Jang", 17, true);
 // console.log(book1.info());
 // console.table(book1);
+
 addBookToLibrary("Hahaha", "JC Jang", 17, true);
 addBookToLibrary("Ho ho ho", "JC Jang", 117, true);
 addBookToLibrary("Hut Hut", "JC Jang", 1117, false);
+
 // console.log(myLibrary);
 
 displayBooks();
+
+// Select our DOM elements
+const newBookBtn = document.querySelector("#new-book-btn");
+const bookDialog = document.querySelector("#book-dialog");
+const bookForm = document.querySelector("#book-form");
+const closeDialogBtn = document.querySelector("#close-dialog-btn");
+
+// 1. Open the dialog when "New Book" is clicked
+newBookBtn.addEventListener("click", () => {
+    bookDialog.showModal();
+});
+
+// 2. Close the dialog when "Cancel" is clicked
+closeDialogBtn.addEventListener("click", () => {
+    bookDialog.close();
+});
+
+// 3. Handle the form submission
+bookForm.addEventListener("submit", (event) => {
+    //Prevent the default form submission which reloads the page
+    event.preventDefault();
+
+    // Grab the values from the inputs
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = document.querySelector("#pages").value;
+    // Checkboxes use .checked instead of .value
+    const read = document.querySelector("#read").checked;
+
+    // Add the new book to our array
+    addBookToLibrary(title, author, pages, read);
+
+    // Update the display to show the new card
+    displayBooks();
+
+    // Clear out the form inputs for the next time
+    bookForm.reset();
+
+    // Close the dialog
+    bookDialog.close();
+})
+
+
 
